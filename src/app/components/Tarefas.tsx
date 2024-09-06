@@ -9,6 +9,7 @@ type Props = {
 };
 
 export default function Tarefas({ tarefas }: Props) {
+  console.log("Component Tarefas...");
   return (
     <div className="bg-white max-w-[1024px] m-auto mt-10 rounded-lg overflow-hidden shadow-lg">
       <div className="p-5">
