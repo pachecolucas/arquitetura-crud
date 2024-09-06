@@ -33,7 +33,7 @@ export default function Tarefas({ tarefas }: Props) {
             placeholder="Nova tarefa aqui"
             className="border py-1 px-2 rounded-md w-full"
           />
-          <button className="bg-yellow-200 p-3 py-2 rounded-md">
+          <button className="bg-yellow-200 p-3 py-2 rounded-md hover:bg-yellow-300 transition-all">
             Adicionar
           </button>
         </form>

@@ -1,6 +1,5 @@
 "use server"
 
-import { revalidatePath } from "next/cache"
 import db from "./db"
 import { sql } from 'drizzle-orm'
 import { redirect } from 'next/navigation'
