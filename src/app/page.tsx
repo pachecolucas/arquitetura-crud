@@ -1,11 +1,13 @@
-import { getTarefas } from "@/app/services/tarefa";
+import { getTarefas, getEmptyTarefa } from "@/app/services/tarefa";
 import Tarefas from "./components/Tarefas";
 
 export const dynamic = "force-dynamic";
 
-export default async function Home() {
-  console.log("Page Home...");
-  const tarefas = await getTarefas();
+// export const revalidate = 0
 
-  return <Tarefas tarefas={tarefas} />;
+export default async function Home() {
+  const tarefas = await getTarefas();
+  const tarefa = await getEmptyTarefa();
+
+  return <Tarefas tarefas={tarefas} tarefa={tarefa} />;
 }

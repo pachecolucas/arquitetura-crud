@@ -10,18 +10,31 @@ type Tarefa = {
 }
 export default Tarefa
 
+export async function getEmptyTarefa(): Promise<Tarefa> {
+    return { id: null, titulo: "" }
+}
 export async function getTarefas(): Promise<Tarefa[]> {
-    return await db.execute(sql`SELECT * FROM tarefas`) as Tarefa[]
+    return await db.execute(sql`SELECT * FROM tarefas ORDER BY id`) as Tarefa[]
 }
 
 export async function saveTarefa(formData: FormData) {
 
+    const id = +(formData.get('id') as string) as number
+    const titulo = formData.get('titulo') as string
+
     const tarefa: Tarefa = {
-        id: null,
-        titulo: formData.get('titulo') as string
+        id,
+        titulo
     }
 
-    await db.execute(sql`INSERT INTO tarefas (titulo) VALUES (${tarefa.titulo})`)
+    if (!id) {
+        // save
+        await db.execute(sql`INSERT INTO tarefas (titulo) VALUES (${tarefa.titulo})`)
+    } else {
+        // update
+        await db.execute(sql`UPDATE tarefas SET titulo=${tarefa.titulo} WHERE id=${tarefa.id}`)
+    }
+
 
     redirect('/')
 }
