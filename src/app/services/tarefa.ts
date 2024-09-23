@@ -6,43 +6,41 @@ import { redirect } from 'next/navigation'
 
 type Tarefa = {
     id: number | null
-    titulo: string
+    nome: string
 }
 export default Tarefa
 
 export async function getEmptyTarefa(): Promise<Tarefa> {
-    return { id: null, titulo: "" }
+    return { id: null, nome: "" }
 }
 export async function getTarefas(): Promise<Tarefa[]> {
-    return await db.execute(sql`SELECT * FROM tarefas ORDER BY id`) as Tarefa[]
+    return await db.execute(sql`SELECT * FROM tarefa ORDER BY id`) as Tarefa[]
 }
 
 export async function saveTarefa(formData: FormData) {
 
     const id = +(formData.get('id') as string) as number
-    const titulo = formData.get('titulo') as string
+    const nome = formData.get('nome') as string
 
     const tarefa: Tarefa = {
         id,
-        titulo
+        nome
     }
 
     if (!id) {
         // save
-        await db.execute(sql`INSERT INTO tarefas (titulo) VALUES (${tarefa.titulo})`)
+        await db.execute(sql`INSERT INTO tarefa (nome) VALUES (${tarefa.nome})`)
     } else {
         // update
-        await db.execute(sql`UPDATE tarefas SET titulo=${tarefa.titulo} WHERE id=${tarefa.id}`)
+        await db.execute(sql`UPDATE tarefa SET nome=${tarefa.nome} WHERE id=${tarefa.id}`)
     }
-
-
     redirect('/')
 }
 
 
 export async function removeTarefa(tarefa: Tarefa) {
 
-    await db.execute(sql`DELETE FROM tarefas WHERE id=${tarefa.id}`)
+    await db.execute(sql`DELETE FROM tarefa WHERE id=${tarefa.id}`)
 
     redirect('/')
 }

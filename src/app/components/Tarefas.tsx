@@ -23,7 +23,7 @@ export default function Tarefas({ tarefas, tarefa: novaTarefa }: Props) {
               key={t.id}
               className="px-3 py-1 text-slate-800 rounded-md bg-slate-50 flex justify-between"
             >
-              <div onClick={() => setTarefa(t)}>{t.titulo}</div>
+              <div onClick={() => setTarefa(t)}>{t.nome}</div>
               <div onClick={() => removeTarefa(t)}>remove</div>
             </div>
           ))}
@@ -34,11 +34,11 @@ export default function Tarefas({ tarefas, tarefa: novaTarefa }: Props) {
           <input type="hidden" name="id" value={`${tarefa?.id}`} />
           <input
             type="text"
-            name="titulo"
+            name="nome"
             placeholder="Nova tarefa aqui"
             className="border py-1 px-2 rounded-md w-full"
-            value={tarefa.titulo}
-            onChange={(e) => setTarefa({ ...tarefa, titulo: e.target.value })}
+            value={tarefa.nome}
+            onChange={(e) => setTarefa({ ...tarefa, nome: e.target.value })}
           />
           {tarefa.id && (
             <button
