@@ -4,6 +4,7 @@ import { saveTarefa, removeTarefa } from "@/app/services/tarefa";
 
 import Tarefa from "../services/tarefa";
 import { useState } from "react";
+import { useSession, signIn } from "next-auth/react";
 
 type Props = {
   tarefas: Tarefa[];
@@ -12,9 +13,13 @@ type Props = {
 
 export default function Tarefas({ tarefas, tarefa: novaTarefa }: Props) {
   const [tarefa, setTarefa] = useState<Tarefa>(novaTarefa);
+  const { data: session } = useSession();
+
+  console.log({ session });
 
   return (
     <div className="bg-white max-w-[1024px] m-auto mt-10 rounded-lg overflow-hidden shadow-lg">
+      teste: <button onClick={() => signIn()}>Sign in</button>
       <div className="p-5">
         <h1 className="font-semibold uppercase text-lg">Tarefas</h1>
         <div className="flex flex-col gap-2 my-5">

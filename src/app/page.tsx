@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 // export const revalidate = 0
 
-export default async function Home() {
+export default async function Page() {
   const tarefas = await getTarefas();
   const tarefa = await getEmptyTarefa();
 
